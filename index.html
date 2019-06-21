@@ -105,6 +105,9 @@
       let names
       let surnames
 
+      document.querySelector('.name-list--extracted-names .count').onclick = () => download('names', names)
+      document.querySelector('.name-list--extracted-surnames .count').onclick = () => download('surnames', surnames)
+
       /**
        * Dropzone
        */
@@ -154,7 +157,7 @@
         surnames = surnames.concat(greekNames.map((name) => name.split(' ').pop()))
         const extractedSurnames = unique(surnames).sort()
         document.querySelector('.name-list--extracted-surnames  .content').innerHTML = `<ul>${toHTMLList(extractedSurnames)}</ul>`
-        document.querySelector('.name-list--extracted-surnames  .count').innerText = extractedNames.length
+        document.querySelector('.name-list--extracted-surnames  .count').innerText = extractedSurnames.length
       }
 
       function isGreek (name) {
@@ -180,6 +183,15 @@
           }
           return acc
         }, [])
+      }
+
+      function download (filename, data) {
+        const el = document.createElement('a')
+        el.setAttribute('href', 'data:text/plain;charset=utf-8,' + JSON.stringify(data))
+        el.setAttribute('download', `${filename}.json`)
+        document.body.appendChild(el)
+        el.click()
+        document.body.removeChild(el)
       }
     </script>
 </body>
