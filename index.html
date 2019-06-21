@@ -154,7 +154,7 @@
         surnames = surnames.concat(greekNames.map((name) => name.split(' ').pop()))
         const extractedSurnames = unique(surnames).sort()
         document.querySelector('.name-list--extracted-surnames  .content').innerHTML = `<ul>${toHTMLList(extractedSurnames)}</ul>`
-        document.querySelector('.name-list--extracted-surnames  .count').innerText = extractedNames.length
+        document.querySelector('.name-list--extracted-surnames  .count').innerText = extractedSurnames.length
       }
 
       function isGreek (name) {
